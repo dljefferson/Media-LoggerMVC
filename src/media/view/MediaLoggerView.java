@@ -61,7 +61,7 @@ public class MediaLoggerView {
 				String category = setText("Enter Category", "Category Dialog");
 				MediaController appMe = new MediaController();
 				appMe.setMovie(title, director, dateViewed, category);
-				//System.out.println(appMe);
+				
 				JOptionPane.showMessageDialog(frmMediaLogger,
 					    "Movie Logged",
 					    "Media Logger",

@@ -1,19 +1,36 @@
 package media.model;
 
 public class Movie {
+	private int id;
 	private String title;
 	private String director;
-	private String dateViewed;
+	private String viewDate;
 	private String category;
 	
-	public Movie(String title, String director, String dateViewed, String category){
+	public Movie(int id, String title, String director, String viewDate, String category){
 		super();
 		this.title = title;
 		this.director = director;
-		this.dateViewed = dateViewed;
+		this.viewDate = viewDate;
+		this.category = category;
+	}
+	
+	public Movie(String title, String director, String viewDate, String category){
+		super();
+		this.title = title;
+		this.director = director;
+		this.viewDate = viewDate;
 		this.category = category;
 	}
 
+	public int getId(){
+		return id;
+	}
+
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -30,12 +47,12 @@ public class Movie {
 		this.director = director;
 	}
 
-	public String getDateViewed() {
-		return dateViewed;
+	public String getViewDate() {
+		return viewDate;
 	}
 
-	public void setDateViewed(String dateViewed) {
-		this.dateViewed = dateViewed;
+	public void setViewDate(String viewDate) {
+		this.viewDate = viewDate;
 	}
 
 	public String getCategory() {

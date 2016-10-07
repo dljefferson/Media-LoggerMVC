@@ -1,6 +1,6 @@
 package media.controller;
+import media.dataaccess.*;
 import media.model.*;
-import media.entities.*;
 public class MediaController {
 	
 	private Movie appMovie;
@@ -21,7 +21,7 @@ public class MediaController {
 		
 		appMovie.setTitle(title);
 		appMovie.setDirector(director);
-		appMovie.setDateViewed(dateViewed);
+		appMovie.setViewDate(dateViewed);
 		appMovie.setCategory(category);
 		
 		appMovieMdl = new MovieModel();

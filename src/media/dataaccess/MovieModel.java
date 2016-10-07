@@ -1,32 +1,35 @@
 package media.dataaccess;
-import java.sql.*;
 
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import media.model.*;
 public class MovieModel {
 
 	public boolean insertMovie(Movie m){
 		
-		PreparedStatement ps = null;
-		try{
-			ps = DBConnect.getConnection().prepareStatement(
-					"INSERT INTO MOVIES(title,director,viewDate,category) VALUES(?,?,?,?)");
-			ps.setString(1, m.getTitle());
-			ps.setString(2, m.getDirector());
-			ps.setString(3, m.getDateViewed());
-		    ps.setString(4, m.getCategory());
-		    //System.out.println(m.getTitle() + m.getDirector() + m.getDateViewed());
-		    return ps.executeUpdate() > 0;
-		    
-		}catch(Exception e){
-			return false;
-		}
-		
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
+	    configure().loadProperties("hibernate.cfg.xml").build();
+	    SessionFactory sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
+			        
+			        // opens a new session from the session factory
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.persist(m);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+         
+	
 	}
 
-	public Movie[] getMovie(){
+	//public Movie[] getMovie(){
 		
-		return null;
+		//return null;
 		
-	}
+	//}
 }
