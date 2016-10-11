@@ -1,10 +1,16 @@
 package media.doa;
 
 
+
+
+import java.util.ArrayList;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.mapping.List;
 import org.hibernate.service.ServiceRegistry;
 import media.model.*;
 
@@ -39,8 +45,10 @@ public class MovieDOA {
 	    // opens a new session from the session factory
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		        
-	    Movie m = (Movie)session.get(Movie.class, new Integer(6));
+		
+		//maps movie object to database item
+	    
+		Movie m = (Movie)session.get(Movie.class, new Integer(6));
 		        
 		session.getTransaction().commit();
 		session.close();
@@ -48,6 +56,25 @@ public class MovieDOA {
 	          	
 	}
 
-    
+    public ArrayList<Movie> listMovies(){
+    	
+    	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
+    	configure().loadProperties("hibernate.cfg.xml").build();
+        SessionFactory sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
+    						        
+    		    // opens a new session from the session factory
+    	Session session = sessionFactory.openSession();
+    	session.beginTransaction();
+    	
+    	
+    	
+    	String hql = "FROM MOVIE";
+    	ArrayList<Movie> movie = new ArrayList<Movie>();
+    	
+    	Query query = session.createQuery(hql);
+    	//Movie[] results = query.list();
+    	movie.addAll(query.list());
+    	return movie;         
+    }
 
 }
