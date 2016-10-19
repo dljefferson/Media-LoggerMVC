@@ -21,20 +21,22 @@ public class MediaController {
 	
 	}
 	
-	public ArrayList<String[]> listMovies(){
+	public ArrayList<ArrayList<String>> listMovies(){
 		
 		MovieDOA d = new MovieDOA();
 		
-	    ArrayList<Movie> mList = d.getMovies();
-	    ArrayList<String[]>movies = new ArrayList<String[]>();
-	  
-
-	    //System.out.println(mList.size());
-		for(int i = 0; i < mList.size(); i++){
+		ArrayList<Movie> mList = d.getMovies();
+	    ArrayList<ArrayList<String>>movies = new ArrayList<ArrayList<String>>();
+	    
+        for(int i = 0; i < mList.size(); i++){
 		    Movie m = mList.get(i);
-		    String[] fields = {m.getTitle(), m.getDirector(), m.getViewDate(), m.getCategory()};
+		    ArrayList<String>fields = new ArrayList<String>();
+		    fields.add(m.getTitle());
+		    fields.add(m.getDirector());
+		    fields.add(m.getViewDate());
+		    fields.add(m.getCategory());
 		    movies.add(fields);
-		    
+		    //String[] fields = {m.getTitle(), m.getDirector(), m.getViewDate(), m.getCategory()};
 		}   
 		return movies;
 	}

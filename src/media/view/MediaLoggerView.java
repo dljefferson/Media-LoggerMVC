@@ -4,7 +4,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
+import org.hibernate.mapping.List;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -19,7 +22,7 @@ public class MediaLoggerView {
  
 	private JFrame frmMediaLogger;
 	private JButton btnMoviesSeen;
-
+    private JTable mediaTable;
 	/**
 	 * Launch the application.
 	 */
@@ -132,12 +135,23 @@ public class MediaLoggerView {
 		btnMoviesSeen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//appController.listMovies();
-				ArrayList<String[]>list = appController.listMovies();
-				for(int i = 0; i < list.size(); i++){
-				    String[] m = list.get(i);
-				    System.out.println(Arrays.toString(m));
-				  }   
+				ArrayList<ArrayList<String>>list = appController.listMovies();
+				Object[] movieCols = {"Title", "Director", "Date Viewed", "Category"};
+				String[][] tempTable = new String[list.size()][];
+				
+				int i = 0;
+			    for (ArrayList<String> next : list) {
+			      tempTable[i++] = next.toArray(new String[next.size()]);
+			        }
+
+			        JTable EndTable = new JTable(tempTable,movieCols);
+
+			        JFrame frame = new JFrame("Movies Seen");
+			        frame.getContentPane().add(new JScrollPane(EndTable));
+			        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			        frame.pack();
+			        frame.setVisible(true);
+				
 			}
 		});
 		btnMoviesSeen.setBounds(94, 132, 250, 23);
@@ -168,4 +182,7 @@ public class MediaLoggerView {
         
     	return s;
     }
+    
+	
+
 }
