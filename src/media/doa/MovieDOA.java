@@ -33,11 +33,12 @@ public class MovieDOA {
         session.close();
         return true;
          
-	
+
 	}
     //Movie[]
 	public Movie getMovie(){
 		
+		//creates new session factory
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
 	    configure().loadProperties("hibernate.cfg.xml").build();
 		SessionFactory sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
@@ -56,7 +57,7 @@ public class MovieDOA {
 	          	
 	}
 
-    public ArrayList<Movie> listMovies(){
+    public ArrayList<Movie> getMovies(){
     	
     	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
     	configure().loadProperties("hibernate.cfg.xml").build();
@@ -66,15 +67,15 @@ public class MovieDOA {
     	Session session = sessionFactory.openSession();
     	session.beginTransaction();
     	
-    	
-    	
-    	String hql = "FROM MOVIE";
-    	ArrayList<Movie> movie = new ArrayList<Movie>();
+    	//return all movies from database
+    	String hql = "FROM Movie";
+    	ArrayList<Movie> movies = new ArrayList<Movie>();
     	
     	Query query = session.createQuery(hql);
-    	//Movie[] results = query.list();
-    	movie.addAll(query.list());
-    	return movie;         
+    	
+        movies.addAll(query.list());
+    	
+    	return movies;         
     }
 
 }

@@ -1,10 +1,10 @@
 package media.controller;
+import java.util.ArrayList;
+
 import media.doa.*;
 import media.model.*;
 
 public class MediaController {
-	
-	
 	
 	public void insertMovie(String title, String director, String dateViewed, String category){
 		
@@ -21,14 +21,28 @@ public class MediaController {
 	
 	}
 	
-
-	public void viewMovie(){
+	public ArrayList<String[]> listMovies(){
 		
 		MovieDOA d = new MovieDOA();
-		Movie m = new Movie(); 
-	    
-		m = d.getMovie();
-		System.out.println(m.getTitle() + m.getCategory() + m.getDirector() + m.getViewDate());
 		
+	    ArrayList<Movie> mList = d.getMovies();
+	    ArrayList<String[]>movies = new ArrayList<String[]>();
+	  
+
+	    //System.out.println(mList.size());
+		for(int i = 0; i < mList.size(); i++){
+		    Movie m = mList.get(i);
+		    String[] fields = {m.getTitle(), m.getDirector(), m.getViewDate(), m.getCategory()};
+		    movies.add(fields);
+		    
+		}   
+		return movies;
 	}
+
+	
 }
+	
+
+
+
+
