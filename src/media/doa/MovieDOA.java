@@ -1,10 +1,6 @@
 package media.doa;
 
-
-
-
 import java.util.ArrayList;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,35 +31,15 @@ public class MovieDOA {
          
 
 	}
-    //Movie[]
-	public Movie getMovie(){
-		
-		//creates new session factory
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
-	    configure().loadProperties("hibernate.cfg.xml").build();
-		SessionFactory sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
-					        
-	    // opens a new session from the session factory
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		//maps movie object to database item
-	    
-		Movie m = (Movie)session.get(Movie.class, new Integer(6));
-		        
-		session.getTransaction().commit();
-		session.close();
-	    return m;
-	          	
-	}
-
-    public ArrayList<Movie> getMovies(){
+   
+	//retrieve list of movies from database
+	public ArrayList<Movie> getMovies(){
     	
     	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
     	configure().loadProperties("hibernate.cfg.xml").build();
         SessionFactory sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
     						        
-    		    // opens a new session from the session factory
+        // opens a new session from the session factory
     	Session session = sessionFactory.openSession();
     	session.beginTransaction();
     	
